@@ -49,6 +49,8 @@ class SConn:
                 try:
                     
                     self.create_table(cursor)
+                    db_con.commit()
+                    db_con.close()
                     print('Table created.')
 
                 except sqlite3.OperationalError as e:
