@@ -10,6 +10,7 @@ class SConn:
     def __init__(self):
 
         self.data = {
+            # hard coded data
             'server1': ('ssh', 'root@servername'),
             'server2': ('ssh', '-p 12345', 'user@servername2'),
         }
@@ -26,6 +27,7 @@ class SConn:
         print(self.data)
 
     def load_data(self):
+        '''Load data from database.'''
         
         db_con = sqlite3.connect('scon.db')
         cursor = db_con.cursor()
