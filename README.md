@@ -3,6 +3,7 @@ scon
 
 Small utility for connecting to servers.
 
+### Example
 ```
 $ ./scon.py
 scon> # tab
@@ -32,5 +33,17 @@ The programs included with the Ubuntu system are free software;
 worker@cooloffice:~$ exit
 logout
 Connection to 10.0.13.137 closed.
-scon> 
+scon> q
+$
 ```
+
+### Add servers to DB
+```
+$ sqlitebrowser scon.db # after first program run
+```
+Name field is ID and attrs field is for command separated by pipes, for example: ssh|-p 1234|user@172.16.0.15.
+
+name | attrs
+---|---
+office | ssh&#124;-p 55321&#124;fred@192.168.7.11
+www | ssh&#124;root@webserver
