@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import subprocess
@@ -44,7 +44,7 @@ class SConn:
 
         except sqlite3.OperationalError as error:
             
-            if error.message == 'no such table: commands':
+            if error.args[0] == 'no such table: commands':
 
                 print('Creating table...')
                 try:
@@ -56,7 +56,7 @@ class SConn:
 
                 except sqlite3.OperationalError as e:
                     
-                    print(e.message)
+                    print(e)
 
     def create_table(self, cursor):
         
@@ -64,7 +64,7 @@ class SConn:
 
     def completer(self, text, state):
 
-        choices = self.data.keys()
+        choices = list(self.data.keys())
         results = [x for x in choices if x.startswith(text)] + [None]
 
         return results[state]
@@ -73,7 +73,7 @@ class SConn:
         
         while True:
 
-            string = raw_input('scon> ')
+            string = input('scon> ')
 
             if string == 'q':
 
