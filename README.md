@@ -1,7 +1,8 @@
 scon
 ====
 
-Small utility for connecting to servers.
+Small utility for connecting to servers. Python 3 and no external dependencies.
+
 
 ### Example
 ```
