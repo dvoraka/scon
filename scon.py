@@ -12,8 +12,8 @@ class SConn:
 
         self.data = {
             # hard coded data
-            'server1': ('ssh', 'root@servername'),
-            'server2': ('ssh', '-p 12345', 'user@servername2'),
+            'server1': 'ssh root@servername',
+            'server2': 'ssh -p 12345 user@servername2',
         }
 
         readline.parse_and_bind("tab: complete")
@@ -39,8 +39,8 @@ class SConn:
 
             for field in data:
 
-                params = field[1].split('|')
-                self.data[field[0]] = tuple(params)
+                params = field[1]
+                self.data[field[0]] = params
 
         except sqlite3.OperationalError as error:
             
@@ -82,12 +82,10 @@ class SConn:
             if string in self.data: 
 
                 command = self.data[string]
-                if __debug__:
+                if command.startswith('ssh '):
+
                     print(command)
-
-                if(command[0] == 'ssh'):
-
-                    subprocess.call(command)
+                    subprocess.call(command, shell=True)
 
                 else:
 
