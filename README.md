@@ -13,10 +13,10 @@ server1  server2
 scon> server
 Not found.
 scon> server2
-('ssh', '-p 12345', 'user@servername2') # debug output
+ssh -p 12345 user@servername2  # debug output
 ssh: Could not resolve hostname servername2: Name or service not known
 scon> home
-('ssh', u'user@172.16.0.15')
+ssh user@172.16.0.15
 user@172.16.0.15's password:
 The programs included with the Ubuntu system are free software;
 ...
@@ -24,7 +24,7 @@ The programs included with the Ubuntu system are free software;
 user@172.16.0.15:~$ exit
 logout
 Connection to 172.16.0.15 closed.
-scon> office # or with key
+scon> office  # or with key
 The programs included with the Ubuntu system are free software;
 ...
 
@@ -37,11 +37,11 @@ $
 
 ## Add servers to DB
 ```
-$ sqlitebrowser scon.db # after first program run
+$ sqlitebrowser scon.db  # after first program run
 ```
-Name field is ID and attrs field is for command separated by pipes, for example: ssh|-p 1234|user@172.16.0.15.
+The name field is ID and the attrs field is for a command, for example: *ssh -p 1234 user@172.16.0.15*.
 
 name | attrs
 ---|---
-office | ssh&#124;-p 55321&#124;fred@192.168.7.11
-www | ssh&#124;root@webserver
+office | ssh -p 55321 fred@192.168.7.11
+www | ssh root@webserver
