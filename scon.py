@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
 
 import subprocess
 import readline
@@ -7,7 +8,7 @@ import sqlite3
 
 
 class SConn:
-    
+
     def __init__(self):
 
         self.data = {
@@ -18,9 +19,9 @@ class SConn:
 
         readline.parse_and_bind("tab: complete")
         readline.set_completer(self.completer)
-        
+
     def update(self):
-        
+
         self.load_data()
 
     def print_db(self):
@@ -29,7 +30,7 @@ class SConn:
 
     def load_data(self):
         '''Load data from database.'''
-        
+
         db_con = sqlite3.connect('scon.db')
         cursor = db_con.cursor()
 
@@ -43,23 +44,23 @@ class SConn:
                 self.data[field[0]] = params
 
         except sqlite3.OperationalError as error:
-            
+
             if error.args[0] == 'no such table: commands':
 
                 print('Creating table...')
                 try:
-                    
+
                     self.create_table(cursor)
                     db_con.commit()
                     db_con.close()
                     print('Table created.')
 
                 except sqlite3.OperationalError as e:
-                    
+
                     print(e)
 
     def create_table(self, cursor):
-        
+
         cursor.execute('CREATE TABLE commands(name text, attrs text)')
 
     def completer(self, text, state):
@@ -70,7 +71,7 @@ class SConn:
         return results[state]
 
     def read_input(self):
-        
+
         while True:
 
             string = input('scon> ')
@@ -79,7 +80,7 @@ class SConn:
 
                 break
 
-            if string in self.data: 
+            if string in self.data:
 
                 command = self.data[string]
                 if command.startswith('ssh '):
@@ -101,6 +102,7 @@ def main():
     sc = SConn()
     sc.load_data()
     sc.read_input()
+
 
 if __name__ == '__main__':
 
