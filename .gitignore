@@ -1,2 +1,5 @@
 scon.db
+
 *.swp
+
+.idea/
